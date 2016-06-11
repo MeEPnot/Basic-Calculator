@@ -12,6 +12,15 @@ namespace Calculator
 {
     public partial class Calculator : Form
     {
+        double firstInput = 0;
+        double secondInput = 0;
+        double memory = 0;
+
+        bool plusPressed = false;
+        bool minusPressed = false;
+        bool multiplyPressed = false;
+        bool dividePressed = false; 
+
         public Calculator()
         {
             InitializeComponent();
@@ -24,21 +33,22 @@ namespace Calculator
 
         private void button1_Click(object sender, EventArgs e)
         {
+            textBox1.Clear();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            if (textBox1.Text!="") memory = double.Parse(textBox1.Text);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            if (textBox1.Text != "") memory += double.Parse(textBox1.Text);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            textBox1.Text = memory.ToString();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -58,7 +68,13 @@ namespace Calculator
 
         private void button8_Click(object sender, EventArgs e)
         {
+            firstInput = double.Parse(textBox1.Text);
+            textBox1.Clear();
 
+            plusPressed = false;
+            minusPressed = false;
+            multiplyPressed = false;
+            dividePressed = true;
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -78,7 +94,13 @@ namespace Calculator
 
         private void button12_Click(object sender, EventArgs e)
         {
+            firstInput = double.Parse(textBox1.Text);
+            textBox1.Clear();
 
+            plusPressed = false;
+            minusPressed = false;
+            multiplyPressed = true;
+            dividePressed = false;
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -98,7 +120,13 @@ namespace Calculator
 
         private void button16_Click(object sender, EventArgs e)
         {
+            firstInput = double.Parse(textBox1.Text);
+            textBox1.Clear();
 
+            plusPressed = false;
+            minusPressed = true;
+            multiplyPressed = false;
+            dividePressed = false;
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -106,14 +134,34 @@ namespace Calculator
             textBox1.Text = textBox1.Text + button17.Text;
         }
 
+        private void button18_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = textBox1.Text + button18.Text;
+        }
+
         private void button19_Click(object sender, EventArgs e)
         {
+            secondInput = double.Parse(textBox1.Text);
 
+            if (plusPressed) firstInput += secondInput;
+            else if (minusPressed) firstInput -= secondInput;
+            else if (multiplyPressed) firstInput *= secondInput;
+            else if (dividePressed) firstInput /= secondInput;
+
+            textBox1.Text = firstInput.ToString();
+            firstInput = 0;
+            secondInput = 0;
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
+            firstInput = double.Parse(textBox1.Text);
+            textBox1.Clear();
 
+            plusPressed = true;
+            minusPressed = false;
+            multiplyPressed = false;
+            dividePressed = false;
         }
 
     }
